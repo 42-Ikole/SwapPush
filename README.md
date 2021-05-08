@@ -1,2 +1,2 @@
-# Push_swap
-Sorts integers like a beast!!
+# PushiSwappi
+Sorts real cool integers yes
