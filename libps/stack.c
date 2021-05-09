@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:58:26 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/09 19:34:53 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/09 21:07:05 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,17 @@ t_stack	*stack_init(int length, char **ints)
 		length--;
 	}
 	return (new);
+}
+
+int		stack_sorted(t_stack *a, t_stack *b)
+{
+	if (b != NULL)
+		return (false);
+	while (a->prev)
+	{
+		if (a->prev->nb < a->nb)
+			return (false);
+		a = a->prev;
+	}
+	return (true);
 }
