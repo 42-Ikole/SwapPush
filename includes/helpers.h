@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   checker.c                                          :+:    :+:            */
+/*   helpers.h                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/05/08 14:40:11 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/09 14:27:15 by ingmar        ########   odam.nl         */
+/*   Created: 2021/05/09 13:41:12 by ingmar        #+#    #+#                 */
+/*   Updated: 2021/05/09 14:26:58 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/helpers.h"
+#ifndef HELPERS_H
+# define HELPERS_H
 
-int main(int argc, char **argv)
-{
-	if (argc != 2)
-		error("Wrong number of arguments amigo!\n", FATAL);
-	return (0);
-}
+# define FATAL		1
+# define HARMLESS	0
+
+void	error(char *msg, int is_fatal);
+void	*better_malloc(int size);
+
+#endif

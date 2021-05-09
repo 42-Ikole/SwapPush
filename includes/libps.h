@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   checker.c                                          :+:    :+:            */
+/*   libps.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/05/08 14:40:11 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/09 14:27:15 by ingmar        ########   odam.nl         */
+/*   Created: 2021/05/09 13:57:01 by ingmar        #+#    #+#                 */
+/*   Updated: 2021/05/09 15:31:05 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/helpers.h"
+#ifndef LIBPS_H
+# define LIBPS_H
 
-int main(int argc, char **argv)
+typedef struct s_stack
 {
-	if (argc != 2)
-		error("Wrong number of arguments amigo!\n", FATAL);
-	return (0);
-}
+	int				nb;
+	struct s_stack	*prev;
+}	t_stack;
+
+t_stack	*stack_push(t_stack *stack, int data);
+t_stack	*stack_pop(t_stack *stack);
+void	stack_swap(t_stack *stack);
+void	stack_rotate(t_stack *stack);
+void	stack_reverse_rotate(t_stack *stack);
+void	stack_switch(t_stack **stack_left, t_stack **stack_right);
+
+#endif
