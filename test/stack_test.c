@@ -42,4 +42,6 @@ int main(void)
 	print_stack(a);
 	printf("after switcheroo stack b\n----------------------------\n");
 	print_stack(b);
+	stack_swap(a);
+	stack_pop(a);
 }

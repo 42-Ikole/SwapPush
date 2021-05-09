@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:41:18 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/09 15:07:16 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/09 19:22:33 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,22 @@ static int	ft_strlen(char *str)
 	return (i);
 }
 
-void		error(char *msg, int is_fatal)
+int			ft_strcmp(char *s1, char *s2)
 {
-	write(2, msg, ft_strlen(msg));
+	int i;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (-1);
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+
+void		error(char *msg, e_bool is_fatal)
+{
+	write(STDERR_FILENO, "\e[0;196mError\n\e[0;220m", 22);
+	write(STDERR_FILENO, msg, ft_strlen(msg));
 	if (is_fatal == FATAL)
 		exit (1);
 }
@@ -39,4 +52,29 @@ void		*better_malloc(int size)
 	if (ret == NULL)
 		error("Real unfortunate malloc fail!\n", FATAL);
 	return (ret);
+}
+
+int			ft_atoi(char *str)
+{
+	long long res;
+	long long sgn;
+
+	res = 0;
+	sgn = 1;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-')
+		sgn = -1;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str >= '0' && *str <= '9')
+	{
+		if ((res * 10 + (*str - '0')) < res)
+			return (((sgn * -1) - 1) / 2);
+		res = res * 10 + *str - '0';
+		str++;
+	}
+	if (!*str)
+		error("YARR, These integers invalid matey!\n", FATAL);
+	return ((int)(res * sgn));
 }
