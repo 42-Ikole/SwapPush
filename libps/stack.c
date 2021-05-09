@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:58:26 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/09 18:21:38 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/09 19:34:53 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,17 @@ void	stack_switch(t_stack **stack_left, t_stack **stack_right)
 	if (stack_left && *stack_left)
 		stack_push(*stack_right, (*stack_left)->nb);
 	stack_pop(*stack_left);
+}
+
+t_stack	*stack_init(int length, char **ints)
+{
+	t_stack *new;
+
+	new = NULL;
+	while (length > 0)
+	{
+		stack_push(&new, ft_atoi(ints[length]));
+		length--;
+	}
+	return (new);
 }

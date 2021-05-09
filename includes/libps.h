@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:57:01 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/09 18:16:07 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/09 19:36:49 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ typedef struct s_stack
 	int				nb;
 	struct s_stack	*prev;
 }	t_stack;
+
+t_stack	*stack_init(int length, char **ints);
 
 /*
 ** STACK FUNCTIONALITY

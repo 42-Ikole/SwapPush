@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:40:11 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/09 19:29:02 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/09 19:46:42 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@ static int		is_sorted(t_stack *a, t_stack *b)
 		a = a->prev;
 	}
 	return (true);
-}
-
-static t_stack	*init_stack(int length, char **ints)
-{
-	t_stack *new;
-
-	new = NULL;
-	while (length > 0)
-	{
-		stack_push(&new, ft_atoi(ints[length]));
-		length--;
-	}
-	return (new);
 }
 
 void			read_instructions(t_stack *a, t_stack *b)
@@ -70,7 +57,7 @@ int				main(int argc, char **argv)
 
 	if (argc < 2)
 		error("Wrong number of arguments amigo!\n", FATAL); //display nothing?
-	a = init_stack(argv);
+	a = stack_init(argc, argv);
 	b = NULL;
 	read_instructions(a, b);
 	return (0);
