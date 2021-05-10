@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:41:18 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/10 15:07:25 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/10 18:38:53 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-static int	ft_strlen(char *str)
+int			ft_strlen(char *str)
 {
 	int i;
 

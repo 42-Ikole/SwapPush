@@ -6,7 +6,7 @@
 #    By: ingmar <ingmar@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/05/08 14:40:19 by ingmar        #+#    #+#                  #
-#    Updated: 2021/05/10 16:33:06 by ikole         ########   odam.nl          #
+#    Updated: 2021/05/10 17:24:29 by ikole         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ HELPERS_OBJ	= $(HELPERS_SRC:.c=.o)
 ## LIBPS
 #
 
-LIBPS_SRC	= libps/stack.c libps/instructions.c
+LIBPS_SRC	= libps/stack.c libps/instructions.c libps/stack_helpers.c
 
 LIBPS_OBJ	= $(LIBPS_SRC:.c=.o)
 

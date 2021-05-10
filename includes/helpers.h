@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:41:12 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/10 15:01:25 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/10 18:39:06 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void	*better_malloc(int size);
 int		ft_atoi(char *str);
 int		ft_strcmp(char *s1, char *s2);
 char	**ft_split(char const *s, char c);
+int		ft_strlen(char *str);
 
 #endif

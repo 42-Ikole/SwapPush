@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 16:20:26 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/10 16:48:27 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/10 19:45:55 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	rrr(t_stack *a, t_stack *b)
 #include <stdio.h>
 void	exec_instruction(t_stack **a, t_stack **b, char *ins)
 {
-	printf("%s      |\n---------\n", ins);
+	// printf("%s      |\n---------\n", ins);
 	if (!ft_strcmp(ins, "sa"))
 		stack_swap(*a);
 	else if (!ft_strcmp(ins, "sb"))
@@ -59,5 +59,5 @@ void	exec_instruction(t_stack **a, t_stack **b, char *ins)
 		rrr(*a, *b);
 	else
 		error("WHOA that command does not exist\n", FATAL); //maybe not exit yes?
-	print_stack(*a, *b);
+	// print_stack(*a, *b);
 }
