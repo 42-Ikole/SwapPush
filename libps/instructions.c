@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 16:20:26 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/10 16:17:04 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/10 16:48:27 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	exec_instruction(t_stack **a, t_stack **b, char *ins)
 	else if (!ft_strcmp(ins, "ss"))
 		ss(*a, *b);
 	else if (!ft_strcmp(ins, "pa"))
-		stack_switch(a, b);
-	else if (!ft_strcmp(ins, "pb"))
 		stack_switch(b, a);
+	else if (!ft_strcmp(ins, "pb"))
+		stack_switch(a, b);
 	else if (!ft_strcmp(ins, "ra"))
 		stack_rotate(*a);
 	else if (!ft_strcmp(ins, "rb"))
