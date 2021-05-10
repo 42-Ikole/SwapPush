@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:58:26 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/10 14:45:59 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/10 16:26:33 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,15 @@ void	stack_swap(t_stack *stack)
 
 void	stack_rotate(t_stack *stack)
 {
-	int		head;
+	t_stack *tmp;
 
 	if (!stack || !stack->prev)
 		return ;
-	head = stack->nb;
+	tmp = stack;
+	tmp->prev = NULL;
 	while (stack->prev != NULL)
-	{
-		stack->nb = stack->prev->nb;
 		stack = stack->prev;
-	}
-	stack->nb = head;
+	stack->prev = tmp;
 }
 
 void	stack_reverse_rotate(t_stack *stack)
@@ -96,12 +94,22 @@ void	stack_switch(t_stack **stack_left, t_stack **stack_right)
 t_stack	*stack_init(int length, char **ints)
 {
 	t_stack *new;
+	char	**splt;
+	int		i;
 
 	new = NULL;
 	while (length > 1)
 	{
 		length--;
-		stack_push(&new, ft_atoi(ints[length]));
+		i = 0;
+		splt = ft_split(ints[length], ' ');
+		while (splt[i])
+		{
+			stack_push(&new, ft_atoi(splt[i]));
+			free(splt[i]);
+			i++;
+		}
+		free(splt);
 	}
 	return (new);
 }
@@ -117,4 +125,21 @@ int		stack_sorted(t_stack *a, t_stack *b)
 		a = a->prev;
 	}
 	return (true);
+}
+
+#include <stdio.h>
+#include <unistd.h>
+void	print_stack(t_stack *a, t_stack *b)
+{
+	while (a || b)
+	{
+		printf("%d		%d\n", (a) ? a->nb : 0, (b) ? b->nb : 0);
+		if (a)
+			a = a->prev;
+		if (b)
+			b = b->prev;
+	}
+	usleep(200000);
+	printf("-------------------------------------------\n");
+	// system("clear");
 }

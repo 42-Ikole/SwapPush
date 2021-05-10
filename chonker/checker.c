@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:40:11 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/09 21:07:12 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/10 16:18:01 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void			read_instructions(t_stack *a, t_stack *b)
 	while (ret > 0)
 	{
 		ret = get_next_line(STDIN_FILENO, &line);
-		exec_instruction(&a, &b, line);
-		if (line) //misschien ret > 0
+		if (ret > 0)
+			exec_instruction(&a, &b, line);
+		if (ret <= 0) //misschien ret > 0
 			free(line);
 	}
 	if (ret < 0)

@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:41:18 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/10 14:54:04 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/10 15:07:25 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void		*better_malloc(int size)
 	return (ret);
 }
 
-#include <stdio.h>
-
 int			ft_atoi(char *str)
 {
 	long long res;
@@ -63,7 +61,6 @@ int			ft_atoi(char *str)
 
 	res = 0;
 	sgn = 1;
-	printf("%s\n", str);
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str == '-')

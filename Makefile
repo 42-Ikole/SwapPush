@@ -6,7 +6,7 @@
 #    By: ingmar <ingmar@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/05/08 14:40:19 by ingmar        #+#    #+#                  #
-#    Updated: 2021/05/10 14:25:50 by ikole         ########   odam.nl          #
+#    Updated: 2021/05/10 16:33:06 by ikole         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ CHECKER_OBJ = $(CHECKER_SRC:.c=.o)
 ## HELPERS
 #
 
-HELPERS_SRC	= helpers/helpers.c
+HELPERS_SRC	= helpers/helpers.c helpers/ft_split.c
 
 HELPERS_OBJ	= $(HELPERS_SRC:.c=.o)
 
@@ -55,7 +55,7 @@ GNL_SRC		= getnextline/get_next_line.c
 
 GNL_OBJ		= $(GNL_SRC:.c=.o)
 
-FLAGGOS		= -Wall -Wextra -Werror -g -fsanitize=address -o
+FLAGGOS		= -Wall -Wextra -Werror -o
 
 
 all: $(PUSH_SWAP) $(CHECKER)
@@ -72,7 +72,7 @@ re: fclean all
 
 clean:
 	@printf "\e[0;34mRemoving objects\e[0;35m\n"
-	@rm -f $(PUSH_OBJ) $(PUSH_OBJ) $(CHECKER_OBJ) $(HELPERS_OBJ) $(LIBPS_OBJ)
+	@rm -f $(PUSH_OBJ) $(PUSH_OBJ) $(CHECKER_OBJ) $(HELPERS_OBJ) $(LIBPS_OBJ) $(GNL_OBJ)
 
 fclean: clean
 	@printf "\e[0;34mRemoving executables\e[0;35m\n"
