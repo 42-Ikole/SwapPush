@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:41:18 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/09 19:22:33 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/10 14:54:04 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			ft_strcmp(char *s1, char *s2)
 
 void		error(char *msg, e_bool is_fatal)
 {
-	write(STDERR_FILENO, "\e[0;196mError\n\e[0;220m", 22);
+	write(STDERR_FILENO, "\e[0;31mError\e[0m\n\e[0;33m", 25);
 	write(STDERR_FILENO, msg, ft_strlen(msg));
 	if (is_fatal == FATAL)
 		exit (1);
@@ -54,6 +54,8 @@ void		*better_malloc(int size)
 	return (ret);
 }
 
+#include <stdio.h>
+
 int			ft_atoi(char *str)
 {
 	long long res;
@@ -61,6 +63,7 @@ int			ft_atoi(char *str)
 
 	res = 0;
 	sgn = 1;
+	printf("%s\n", str);
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str == '-')
@@ -74,7 +77,7 @@ int			ft_atoi(char *str)
 		res = res * 10 + *str - '0';
 		str++;
 	}
-	if (!*str)
+	if (*str)
 		error("YARR, These integers invalid matey!\n", FATAL);
 	return ((int)(res * sgn));
 }

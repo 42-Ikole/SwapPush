@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 16:20:26 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/09 19:05:24 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/10 13:59:19 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void	exec_instruction(t_stack **a, t_stack **b, char *ins)
 	else if (ft_strcmp(ins, "rb"))
 		stack_rotate(*b);
 	else if (ft_strcmp(ins, "rr"))
-		rr(a, b);
+		rr(*a, *b);
 	else if (ft_strcmp(ins, "rra"))
 		stack_reverse_rotate(*a);
 	else if (ft_strcmp(ins, "rrb"))
 		stack_reverse_rotate(*b);
 	else if (ft_strcmp(ins, "rrr"))
-		rrr(a, b);
+		rrr(*a, *b);
 	else
 		error("WHOA that command does not exist\n", FATAL); //maybe not exit yes?
 }

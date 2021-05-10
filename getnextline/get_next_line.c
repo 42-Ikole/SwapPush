@@ -5,13 +5,14 @@
 /*                                                     +:+                    */
 /*   By: ikole <ikole@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/08 15:00:47 by ikole          #+#    #+#                */
-/*   Updated: 2020/01/14 17:41:05 by ikole         ########   odam.nl         */
+/*   Created: 2020/01/08 15:00:47 by ikole         #+#    #+#                 */
+/*   Updated: 2021/05/10 14:18:21 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 #include <stdlib.h>
+#include <unistd.h>
 #include <limits.h>
 
 static int	ft_nllen(char *str)

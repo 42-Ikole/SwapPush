@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:58:26 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/09 21:07:05 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/10 14:45:59 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	stack_pop(t_stack **stack)
 	if (*stack == NULL)
 	{
 		error("Cannot pop from empty stack\n", HARMLESS);
-		return (stack);
+		return ;
 	}
 	ret = (*stack)->prev;
-	free(stack);
+	free(*stack);
 	*stack = ret;
 }
 
@@ -89,8 +89,8 @@ void	stack_reverse_rotate(t_stack *stack)
 void	stack_switch(t_stack **stack_left, t_stack **stack_right)
 {
 	if (stack_left && *stack_left)
-		stack_push(*stack_right, (*stack_left)->nb);
-	stack_pop(*stack_left);
+		stack_push(stack_right, (*stack_left)->nb);
+	stack_pop(stack_left);
 }
 
 t_stack	*stack_init(int length, char **ints)
@@ -98,10 +98,10 @@ t_stack	*stack_init(int length, char **ints)
 	t_stack *new;
 
 	new = NULL;
-	while (length > 0)
+	while (length > 1)
 	{
-		stack_push(&new, ft_atoi(ints[length]));
 		length--;
+		stack_push(&new, ft_atoi(ints[length]));
 	}
 	return (new);
 }
