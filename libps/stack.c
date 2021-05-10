@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:58:26 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/10 19:23:39 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/10 23:00:15 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	stack_push(t_stack **stack, int data)
 	new = better_malloc(sizeof(t_stack));
 	new->nb = data;
 	new->prev = NULL;
-	if (stack != NULL)
+	if (*stack != NULL)
 		new->prev = *stack;
 	*stack = new;
 }
@@ -86,7 +86,7 @@ void	stack_reverse_rotate(t_stack *stack)
 
 void	stack_switch(t_stack **stack_left, t_stack **stack_right)
 {
-	if (stack_left && *stack_left)
+	if (*stack_left && *stack_left)
 		stack_push(stack_right, (*stack_left)->nb);
 	stack_pop(stack_left);
 }

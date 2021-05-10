@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:39:36 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/10 19:45:42 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/10 23:07:13 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	print_instructions(t_stack **a, t_stack **b, int amt, char *ins)
 	}
 }
 
-void	push_elem(t_stack **a, t_stack **b, int nb)
+void	push_elem_a(t_stack **a, t_stack **b, int nb)
 {
 	if (stack_find(*a, nb) > stack_size(*a) >> 1)
 	{
@@ -43,6 +43,20 @@ void	push_elem(t_stack **a, t_stack **b, int nb)
 	}
 }
 
+void	push_elem_b(t_stack **a, t_stack **b, int nb)
+{
+	if (stack_find(*b, nb) > stack_size(*b) >> 1)
+	{
+		print_instructions(a, b, stack_size(*b) - stack_find(*b, nb), "rrb");
+		print_instructions(a, b, 1, "pa");
+	}
+	else
+	{
+		print_instructions(a, b, stack_find(*b, nb), "rb");
+		print_instructions(a, b, 1, "pa");
+	}
+}
+
 void	push_range(t_stack **a, t_stack **b, int range)
 {
 	t_stack *tmp;
@@ -52,38 +66,37 @@ void	push_range(t_stack **a, t_stack **b, int range)
 	{
 		if ((tmp)->nb < range)
 		{
-			push_elem(a, b, (tmp->nb));
-			if ((*b)->nb < (*b)->prev->nb)
+			push_elem_a(a, b, tmp->nb);
+			if ((*b) && (*b)->prev && (*b)->nb < (*b)->prev->nb)
 				print_instructions(a, b, 1, "sb");
+			tmp = *a;
 		}
+		else
+			tmp = tmp->prev;
+	}
+}
+
+void	sort_range(t_stack **a, t_stack **b)
+{
+	t_stack *tmp;
+	int		min;
+	int		max;
+
+	tmp = *b;
+	while (tmp)
+	{
+		stack_min_max(*b, &min, &max);
+		push_elem_b(a, b, max);
 		tmp = tmp->prev;
 	}
 }
 
-void	sort_range(t_stack **a, t_stack **b, int min)
+long		diff(int a, int b)
 {
-	t_stack *tmp;
-	int		rot;
-	int		pos;
-
-	tmp = *b;
-	rot = 0;
-	pos = 0;
-	while (tmp->nb != min)
-	{
-		if (tmp->nb > tmp->prev->nb)
-		{
-			pos = stack_find(*b, tmp->nb);
-			if (pos != 0)
-			{
-				print_instructions(a, b, pos, "rb");
-				rot += pos;
-			}
-			print_instructions(a, b, 1, "sb");
-		}
-		tmp = tmp->prev;
-	}
-	print_instructions(a, b, rot, "rrb");
+	if (a < 0 || b < 0)
+		return ((-a) + b);
+    else
+        return (b - a);
 }
 
 void	do_sort_stuff(t_stack *a, t_stack *b)
@@ -93,15 +106,12 @@ void	do_sort_stuff(t_stack *a, t_stack *b)
 	int	sections;
 
 	sections = (stack_size(a) / 10) + 1;
-	// print_stack(a, b);
 	while (stack_size(a) > 0)
 	{
 		stack_min_max(a, &min, &max);
-		push_elem(&a, &b, min);
-		push_range(&a, &b, min + ((min - max) / sections));
-		sort_range(&a, &b, min);
+		push_range(&a, &b, min + (diff(min, max) / sections));
 	}
-	print_instructions(&a, &b, stack_size(b), "pa");
+	sort_range(&a, &b);
 }
 
 int main(int argc, char **argv)

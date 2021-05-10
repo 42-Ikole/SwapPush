@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:57:01 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/10 18:45:48 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/10 21:46:32 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	exec_instruction(t_stack **a, t_stack **b, char *ins);
 /*
 ** STACK HELPERS
 */
+
 int		stack_sorted(t_stack *a, t_stack *b);
 void	print_stack(t_stack *a, t_stack *b); //
 t_stack	*stack_init(int length, char **ints);

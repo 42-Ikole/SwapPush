@@ -6,7 +6,7 @@
 #    By: ingmar <ingmar@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/05/08 14:40:19 by ingmar        #+#    #+#                  #
-#    Updated: 2021/05/10 17:24:29 by ikole         ########   odam.nl          #
+#    Updated: 2021/05/10 22:20:32 by ingmar        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ GNL_SRC		= getnextline/get_next_line.c
 
 GNL_OBJ		= $(GNL_SRC:.c=.o)
 
-FLAGGOS		= -Wall -Wextra -Werror -o
+FLAGGOS		= -Wall -Wextra -Werror -g -fsanitize=address -o
 
 
 all: $(PUSH_SWAP) $(CHECKER)
