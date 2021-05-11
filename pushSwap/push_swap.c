@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:39:36 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/10 23:07:13 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/11 09:59:51 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	push_range(t_stack **a, t_stack **b, int range)
 	tmp = *a;
 	while (tmp)
 	{
-		if ((tmp)->nb < range)
+		// printf("%d\n", range);
+		if ((tmp)->nb <= range)
 		{
 			push_elem_a(a, b, tmp->nb);
 			if ((*b) && (*b)->prev && (*b)->nb < (*b)->prev->nb)
@@ -104,12 +105,16 @@ void	do_sort_stuff(t_stack *a, t_stack *b)
 	int	min;
 	int max;
 	int	sections;
+	int	range;
 
 	sections = (stack_size(a) / 10) + 1;
 	while (stack_size(a) > 0)
 	{
 		stack_min_max(a, &min, &max);
-		push_range(&a, &b, min + (diff(min, max) / sections));
+		range = min + (diff(min, max) / sections);
+		if (range == min)
+			range = max;
+		push_range(&a, &b, range);
 	}
 	sort_range(&a, &b);
 }

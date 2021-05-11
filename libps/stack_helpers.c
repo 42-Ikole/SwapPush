@@ -6,7 +6,7 @@
 /*   By: ikole <ikole@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/10 17:24:08 by ikole         #+#    #+#                 */
-/*   Updated: 2021/05/10 19:43:40 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/11 09:37:18 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	print_stack(t_stack *a, t_stack *b)
 		if (b)
 			b = b->prev;
 	}
-	usleep(200000);
+	// usleep(200000);
 	printf("-------------------------------------------\n");
 	// system("clear");
 }
