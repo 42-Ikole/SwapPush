@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:39:36 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/11 09:59:51 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/11 11:34:12 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include "../includes/libps.h"
 #include <stdlib.h>
 #include <unistd.h>
+
+long		diff(int a, int b)
+{
+	if (a < 0 || b < 0)
+		return ((-a) + b);
+    else
+        return (b - a);
+}
 
 void	print_instructions(t_stack **a, t_stack **b, int amt, char *ins)
 {
@@ -29,16 +37,16 @@ void	print_instructions(t_stack **a, t_stack **b, int amt, char *ins)
 	}
 }
 
-void	push_elem_a(t_stack **a, t_stack **b, int nb)
+void	push_pos(t_stack **a, t_stack **b, int pos)
 {
-	if (stack_find(*a, nb) > stack_size(*a) >> 1)
+	if (pos > stack_size(*a) >> 1)
 	{
-		print_instructions(a, b, stack_size(*a) - stack_find(*a, nb), "rra");
+		print_instructions(a, b, stack_size(*a) - pos, "rra");
 		print_instructions(a, b, 1, "pb");
 	}
 	else
 	{
-		print_instructions(a, b, stack_find(*a, nb), "ra");
+		print_instructions(a, b, pos, "ra");
 		print_instructions(a, b, 1, "pb");
 	}
 }
@@ -57,6 +65,33 @@ void	push_elem_b(t_stack **a, t_stack **b, int nb)
 	}
 }
 
+int		find_elem_range(t_stack *stack, int range)
+{
+	t_stack *tmp;
+	int		pos_first;
+	int		pos_last;
+	int		pos;
+
+	tmp = stack;
+	pos_first = -1;
+	pos_last = 0;
+	pos = 0;
+	while (tmp)
+	{
+		if (tmp->nb <= range)
+		{
+			if (pos_first == -1)
+				pos_first = pos;
+			pos_last = pos;
+		}
+		tmp = tmp->prev;
+		pos++;
+	}
+	if (diff(pos_first, 0) > diff(pos_last, stack_size(stack)))
+		return (pos_last);
+	return (pos_first);
+}
+
 void	push_range(t_stack **a, t_stack **b, int range)
 {
 	t_stack *tmp;
@@ -67,9 +102,10 @@ void	push_range(t_stack **a, t_stack **b, int range)
 		// printf("%d\n", range);
 		if ((tmp)->nb <= range)
 		{
-			push_elem_a(a, b, tmp->nb);
-			if ((*b) && (*b)->prev && (*b)->nb < (*b)->prev->nb)
-				print_instructions(a, b, 1, "sb");
+			push_pos(a, b, find_elem_range(*a, range));
+			if ((*b) && (*b)->prev && (*b)->nb < (*b)->prev->nb &&
+				(*a) && (*a)->prev && (*a)->nb > (*a)->prev->nb)
+				print_instructions(a, b, 1, "ss");
 			tmp = *a;
 		}
 		else
@@ -90,14 +126,6 @@ void	sort_range(t_stack **a, t_stack **b)
 		push_elem_b(a, b, max);
 		tmp = tmp->prev;
 	}
-}
-
-long		diff(int a, int b)
-{
-	if (a < 0 || b < 0)
-		return ((-a) + b);
-    else
-        return (b - a);
 }
 
 void	do_sort_stuff(t_stack *a, t_stack *b)

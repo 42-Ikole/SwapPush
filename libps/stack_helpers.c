@@ -6,7 +6,7 @@
 /*   By: ikole <ikole@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/10 17:24:08 by ikole         #+#    #+#                 */
-/*   Updated: 2021/05/11 09:37:18 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/11 11:10:47 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		stack_sorted(t_stack *a, t_stack *b)
 #include <unistd.h> //
 void	print_stack(t_stack *a, t_stack *b)
 {
+printf("-------------------------------------------\n");
 	while (a || b)
 	{
 		printf("%d	||	%d\n", (a) ? a->nb : 0, (b) ? b->nb : 0);
@@ -65,9 +66,8 @@ void	print_stack(t_stack *a, t_stack *b)
 		if (b)
 			b = b->prev;
 	}
-	// usleep(200000);
-	printf("-------------------------------------------\n");
-	// system("clear");
+	usleep(600000);
+	system("clear");
 }
 
 int		stack_size(t_stack *stack)
