@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:39:36 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/11 11:34:12 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/11 11:41:07 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,13 +135,11 @@ void	do_sort_stuff(t_stack *a, t_stack *b)
 	int	sections;
 	int	range;
 
-	sections = (stack_size(a) / 10) + 1;
+	sections = ((stack_size(a) % 10) + (stack_size(a) / 10));
 	while (stack_size(a) > 0)
 	{
 		stack_min_max(a, &min, &max);
-		range = min + (diff(min, max) / sections);
-		if (range == min)
-			range = max;
+		range = min + sections;
 		push_range(&a, &b, range);
 	}
 	sort_range(&a, &b);
