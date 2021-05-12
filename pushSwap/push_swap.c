@@ -6,12 +6,13 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:39:36 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/12 09:19:44 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/12 11:18:02 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/helpers.h"
 #include "../includes/libps.h"
+#include "../includes/push_swap.h"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -128,35 +129,24 @@ void	sort_range(t_stack **a, t_stack **b)
 	}
 }
 
-int		get_range(t_stack *stack, int min, int section)
+int		get_range(int min, int section, t_stack *sorted)
 {
-	int		range;
-	t_stack	*head;
-	int		found;
+	int i;
 
-	head = stack;
-	found = 0;
-	while (found < section)
+	while (sorted && sorted->nb < min)
+		sorted = sorted->prev;
+	i = 0;
+	while (sorted && i < section)
 	{
-		stack = head;
-		range = __INT_MAX__;
-		while (stack)
-		{
-			if (stack->nb > min && stack->nb < range)
-			{
-				
-				range = stack->nb;
-			}
-			stack = stack->prev;
-		}
-		min = range;
-		// printf("fuck this range = %d\n", range);
-		found++;
+		sorted = sorted->prev;
+		i++;
 	}
-	return (range);
+	if (sorted)
+		return (sorted->nb);
+	return (min);
 }
 
-void	do_sort_stuff(t_stack *a, t_stack *b)
+void	do_sort_stuff(t_stack *a, t_stack *b, t_stack *sorted)
 {
 	int	min;
 	int max;
@@ -172,8 +162,10 @@ void	do_sort_stuff(t_stack *a, t_stack *b)
 	while (stack_size(a) > 0)
 	{
 		stack_min_max(a, &min, &max);
-		range = min + sections;
-		push_range(&a, &b, get_range(a, min, sections));
+		range = get_range(min, sections, sorted);
+		if (range == min)
+			range = max;
+		push_range(&a, &b, range);
 	}
 	sort_range(&a, &b);
 }
@@ -182,11 +174,13 @@ int main(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
+	t_stack *sorted;
 
 	if (argc < 2)
 		error("Wrong number of arguments amigo!\n", FATAL); //display nothing?
 	a = stack_init(argc, argv);
 	b = NULL;
-	do_sort_stuff(a, b);
+	sorted = pre_sort(a);
+	do_sort_stuff(a, b, sorted);
 	return (0);
 }

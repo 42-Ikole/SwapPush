@@ -6,7 +6,7 @@
 #    By: ingmar <ingmar@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/05/08 14:40:19 by ingmar        #+#    #+#                  #
-#    Updated: 2021/05/11 09:31:25 by ingmar        ########   odam.nl          #
+#    Updated: 2021/05/12 10:47:56 by ikole         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 
 PUSH_SWAP	= push_swap
 
-PUSH_SRC	= pushSwap/push_swap.c
+PUSH_SRC	= pushSwap/push_swap.c pushSwap/pre_sort.c
 
 PUSH_OBJ 	= $(PUSH_SRC:.c=.o)
 
