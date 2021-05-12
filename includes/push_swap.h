@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:43:56 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/12 11:49:04 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/12 11:55:53 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ void	push_elem_b(t_stack **a, t_stack **b, int nb);
 t_stack *pre_sort(t_stack *a);
 
 /*
-**  BIG_OL_SORTER.C
+**  SORTING FUNCTIONS
 */
 
 void	big_ol_sorter(t_stack *a, t_stack *b, t_stack *sorted);
+void	smol_sorty(t_stack *a, t_stack *b, t_stack *sorted);
 
 #endif

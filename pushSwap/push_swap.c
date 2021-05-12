@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:39:36 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/12 11:51:21 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/12 12:33:38 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int main(int argc, char **argv)
 	a = stack_init(argc, argv);
 	b = NULL;
 	sorted = pre_sort(a);
-	big_ol_sorter(a, b, sorted);
+	if (stack_size(a) >= 50)
+		big_ol_sorter(a, b, sorted);
+	// else
+	// 	smol_sorty(a, b, sorted);
 	return (0);
 }

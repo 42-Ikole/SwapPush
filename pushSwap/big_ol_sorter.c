@@ -6,7 +6,7 @@
 /*   By: ikole <ikole@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 11:45:16 by ikole         #+#    #+#                 */
-/*   Updated: 2021/05/12 11:51:25 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/12 12:41:47 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,7 @@ void		big_ol_sorter(t_stack *a, t_stack *b, t_stack *sorted)
 
 	if (stack_sorted(a, b) == true)
 		return ;
-	if (stack_size(a) >= 11)
-		sections = ((stack_size(a) % 5) + (stack_size(a) / 11));
-	else
-		sections = 3;
+	sections = ((stack_size(a) % 3) + (stack_size(a) / 11));
 	while (stack_size(a) > 0)
 	{
 		stack_min_max(a, &min, &max);
