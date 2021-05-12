@@ -6,7 +6,7 @@
 #    By: ingmar <ingmar@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/05/08 14:40:19 by ingmar        #+#    #+#                  #
-#    Updated: 2021/05/12 11:50:02 by ikole         ########   odam.nl          #
+#    Updated: 2021/05/12 12:52:01 by ikole         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,47 +15,48 @@
 ## PUSH SWAP
 #
 
-PUSH_SWAP	= push_swap
+PUSH_SWAP	=	push_swap
 
-PUSH_SRC	= pushSwap/push_swap.c pushSwap/pre_sort.c pushSwap/big_ol_sorter.c
+PUSH_SRC	=	pushSwap/push_swap.c pushSwap/pre_sort.c \
+				pushSwap/big_ol_sorter.c pushSwap/smol_sorty.c
 
-PUSH_OBJ 	= $(PUSH_SRC:.c=.o)
+PUSH_OBJ 	=	$(PUSH_SRC:.c=.o)
 
 #
 ## CHECKER
 #
 
-CHECKER		= checker
+CHECKER		=	checker
 
-CHECKER_SRC	= chonker/checker.c
+CHECKER_SRC	=	chonker/checker.c
 
-CHECKER_OBJ = $(CHECKER_SRC:.c=.o)
+CHECKER_OBJ =	$(CHECKER_SRC:.c=.o)
 
 #
 ## HELPERS
 #
 
-HELPERS_SRC	= helpers/helpers.c helpers/ft_split.c
+HELPERS_SRC	=	helpers/helpers.c helpers/ft_split.c
 
-HELPERS_OBJ	= $(HELPERS_SRC:.c=.o)
-
-#
-## LIBPS
-#
-
-LIBPS_SRC	= libps/stack.c libps/instructions.c libps/stack_helpers.c
-
-LIBPS_OBJ	= $(LIBPS_SRC:.c=.o)
+HELPERS_OBJ	=	$(HELPERS_SRC:.c=.o)
 
 #
 ## LIBPS
 #
 
-GNL_SRC		= getnextline/get_next_line.c
+LIBPS_SRC	=	libps/stack.c libps/instructions.c libps/stack_helpers.c
 
-GNL_OBJ		= $(GNL_SRC:.c=.o)
+LIBPS_OBJ	=	$(LIBPS_SRC:.c=.o)
 
-FLAGGOS		= -Wall -Wextra -Werror -o
+#
+## LIBPS
+#
+
+GNL_SRC		=	getnextline/get_next_line.c
+
+GNL_OBJ		=	$(GNL_SRC:.c=.o)
+
+FLAGGOS		=	-Wall -Wextra -Werror -o
 
 
 all: $(PUSH_SWAP) $(CHECKER)

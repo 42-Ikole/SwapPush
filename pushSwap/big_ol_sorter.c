@@ -6,7 +6,7 @@
 /*   By: ikole <ikole@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 11:45:16 by ikole         #+#    #+#                 */
-/*   Updated: 2021/05/12 12:41:47 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/12 12:50:25 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,6 @@ static void	push_range(t_stack **a, t_stack **b, int range)
 		}
 		else
 			tmp = tmp->prev;
-	}
-}
-
-static void	sort_range(t_stack **a, t_stack **b)
-{
-	t_stack *tmp;
-	int		min;
-	int		max;
-
-	tmp = *b;
-	while (tmp)
-	{
-		stack_min_max(*b, &min, &max);
-		push_elem_b(a, b, max);
-		tmp = tmp->prev;
 	}
 }
 

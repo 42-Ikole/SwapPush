@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:39:36 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/12 12:33:38 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/12 12:53:15 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,21 @@
 #include "../includes/push_swap.h"
 #include <stdlib.h>
 #include <unistd.h>
+
+void	sort_range(t_stack **a, t_stack **b)
+{
+	t_stack *tmp;
+	int		min;
+	int		max;
+
+	tmp = *b;
+	while (tmp)
+	{
+		stack_min_max(*b, &min, &max);
+		push_elem_b(a, b, max);
+		tmp = tmp->prev;
+	}
+}
 
 void	print_instructions(t_stack **a, t_stack **b, int amt, char *ins)
 {
@@ -71,7 +86,7 @@ int main(int argc, char **argv)
 	sorted = pre_sort(a);
 	if (stack_size(a) >= 50)
 		big_ol_sorter(a, b, sorted);
-	// else
-	// 	smol_sorty(a, b, sorted);
+	else
+		smol_sorty(a, b);
 	return (0);
 }
