@@ -6,13 +6,21 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:41:18 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/10 18:38:53 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/12 11:50:30 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/helpers.h"
 #include <unistd.h>
 #include <stdlib.h>
+
+long		diff(int a, int b)
+{
+	if (a < 0 || b < 0)
+		return ((-a) + b);
+    else
+        return (b - a);
+}
 
 int			ft_strlen(char *str)
 {
