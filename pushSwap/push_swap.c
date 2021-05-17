@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:39:36 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/12 12:53:15 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/17 18:40:18 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,6 @@
 #include "../includes/push_swap.h"
 #include <stdlib.h>
 #include <unistd.h>
-
-void	sort_range(t_stack **a, t_stack **b)
-{
-	t_stack *tmp;
-	int		min;
-	int		max;
-
-	tmp = *b;
-	while (tmp)
-	{
-		stack_min_max(*b, &min, &max);
-		push_elem_b(a, b, max);
-		tmp = tmp->prev;
-	}
-}
 
 void	print_instructions(t_stack **a, t_stack **b, int amt, char *ins)
 {
@@ -59,34 +44,18 @@ void	push_pos(t_stack **a, t_stack **b, int pos)
 	}
 }
 
-void	push_elem_b(t_stack **a, t_stack **b, int nb)
-{
-	if (stack_find(*b, nb) > stack_size(*b) >> 1)
-	{
-		print_instructions(a, b, stack_size(*b) - stack_find(*b, nb), "rrb");
-		print_instructions(a, b, 1, "pa");
-	}
-	else
-	{
-		print_instructions(a, b, stack_find(*b, nb), "rb");
-		print_instructions(a, b, 1, "pa");
-	}
-}
-
 int main(int argc, char **argv)
 {
-	t_stack	*a;
-	t_stack	*b;
-	t_stack *sorted;
+	t_data	data;
 
 	if (argc < 2)
 		error("Wrong number of arguments amigo!\n", FATAL); //display nothing?
-	a = stack_init(argc, argv);
-	b = NULL;
-	sorted = pre_sort(a);
+	data.a = stack_init(argc, argv);
+	data.b = NULL;
+	data.sorted = pre_sort(a);
 	if (stack_size(a) >= 50)
-		big_ol_sorter(a, b, sorted);
+		big_ol_sorter(&data);
 	else
-		smol_sorty(a, b);
+		smol_sorty(&data);
 	return (0);
 }

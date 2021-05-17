@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:43:56 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/12 12:53:09 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/17 18:37:23 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 # define PUSH_SWAP_H
 
 # include "libps.h"
+
+typedef struct s_data
+{
+	t_stack		*a;
+	t_stack		*b;
+	t_stack		*sorted;
+	int			sections;
+}	t_data;
 
 /*
 **  PUSH_SWAP.C
