@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:39:36 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/17 18:40:18 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/18 13:22:57 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void	print_instructions(t_stack **a, t_stack **b, int amt, char *ins)
+void	print_instructions(t_data *data, int amt, char *ins)
 {
 	int i;
 
@@ -25,24 +25,27 @@ void	print_instructions(t_stack **a, t_stack **b, int amt, char *ins)
 	{
 		write(STDOUT_FILENO, ins, ft_strlen(ins));
 		write(STDOUT_FILENO, "\n", 1);
-		exec_instruction(a, b, ins);
+		exec_instruction(&data->a, &data->b, ins);
 		i++;
 	}
 }
 
-void	push_pos(t_stack **a, t_stack **b, int pos)
+void	push_pos(t_data *data, int pos, int top)
 {
-	if (pos > stack_size(*a) >> 1)
+	if (pos > stack_size(data->a) >> 1)
 	{
-		print_instructions(a, b, stack_size(*a) - pos, "rra");
-		print_instructions(a, b, 1, "pb");
+		print_instructions(data, stack_size(data->a) - pos, "rra");
+		print_instructions(data, 1, "pb");
 	}
 	else
 	{
-		print_instructions(a, b, pos, "ra");
-		print_instructions(a, b, 1, "pb");
+		print_instructions(data, pos, "ra");
+		print_instructions(data, 1, "pb");
 	}
+	if (top < 0)
+		print_instructions(data, 1, "rb");
 }
+
 
 int main(int argc, char **argv)
 {
@@ -52,10 +55,10 @@ int main(int argc, char **argv)
 		error("Wrong number of arguments amigo!\n", FATAL); //display nothing?
 	data.a = stack_init(argc, argv);
 	data.b = NULL;
-	data.sorted = pre_sort(a);
-	if (stack_size(a) >= 50)
+	data.sorted = pre_sort(data.a);
+	if (stack_size(data.a) >= 50)
 		big_ol_sorter(&data);
-	else
-		smol_sorty(&data);
+	// else
+	// 	smol_sorty(&data);
 	return (0);
 }

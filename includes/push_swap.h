@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:43:56 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/17 18:37:23 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/18 13:23:36 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct s_data
 */
 
 void	sort_range(t_stack **a, t_stack **b);
-void	print_instructions(t_stack **a, t_stack **b, int amt, char *ins);
-void	push_pos(t_stack **a, t_stack **b, int pos);
+void	print_instructions(t_data *data, int amt, char *ins);
+void	push_pos(t_data *data, int pos, int top);
 void	push_elem_b(t_stack **a, t_stack **b, int nb);
 t_stack *pre_sort(t_stack *a);
 
@@ -37,7 +37,7 @@ t_stack *pre_sort(t_stack *a);
 **  SORTING FUNCTIONS
 */
 
-void	big_ol_sorter(t_stack *a, t_stack *b, t_stack *sorted);
-void	smol_sorty(t_stack *a, t_stack *b);
+void	big_ol_sorter(t_data *data);
+void	smol_sorty(t_data *data);
 
 #endif
