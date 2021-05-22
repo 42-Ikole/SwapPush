@@ -6,7 +6,7 @@
 /*   By: ikole <ikole@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 11:45:16 by ikole         #+#    #+#                 */
-/*   Updated: 2021/05/22 12:56:56 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/22 20:56:46 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,16 +112,13 @@ void		push_section(int section, int range, t_data *data, int top)
 
 void	sort_range(t_data *data)
 {
-	t_stack *tmp;
 	int		min;
 	int		max;
 
-	tmp = data->b;
-	while (tmp)
+	while (data->b)
 	{
 		stack_min_max(data->b, &min, &max);
 		push_elem_b(data, max);
-		tmp = tmp->prev;
 	}
 }
 
@@ -133,8 +130,10 @@ void		big_ol_sorter(t_data *data)
 
 	if (stack_sorted(data->a, data->b) == true)
 		return ;
-	// data->sections = ((stack_size(data->a) % 3) + (stack_size(data->a) / 11));
-	data->sections = 11;
+	if (stack_size(data->a) >= 250)
+		data->sections = 21;
+	else
+		data->sections = 11;
 	range = stack_size(data->a) / data->sections;
 	mid = data->sections / 2;
 	push_section(mid, range, data, true);

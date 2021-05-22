@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/09 13:57:01 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/12 10:48:01 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/22 19:56:16 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void	print_stack(t_stack *a, t_stack *b); //
 t_stack	*stack_init(int length, char **ints);
 int		stack_size(t_stack *stack);
 void	stack_min_max(t_stack *stack, int *min, int *max);
-int		stack_find(t_stack *a, int nb);
+int		stack_find(t_stack *a, int nb, int offset);
 
 #endif
