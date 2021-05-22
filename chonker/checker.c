@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:40:11 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/11 12:01:33 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/22 12:19:12 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void			read_instructions(t_stack *a, t_stack *b)
 			exec_instruction(&a, &b, line);
 		if (ret <= 0) //misschien ret > 0
 			free(line);
+		print_stack(a, b);
 	}
 	if (ret < 0)
 		error("Something went wrong whilst reading a line!\n", FATAL);

@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:39:36 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/18 13:22:57 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/22 12:54:52 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ void	print_instructions(t_data *data, int amt, char *ins)
 	}
 }
 
+void	push_elem_b(t_data *data, int nb)
+{
+	if (stack_find(data->b, nb) > stack_size(data->b) >> 1)
+	{
+		print_instructions(data, stack_size(data->b) - stack_find(data->b, nb), "rrb");
+		print_instructions(data, 1, "pa");
+	}
+	else
+	{
+		print_instructions(data, stack_find(data->b, nb), "rb");
+		print_instructions(data, 1, "pa");
+	}
+}
+
 void	push_pos(t_data *data, int pos, int top)
 {
 	if (pos > stack_size(data->a) >> 1)
@@ -42,7 +56,7 @@ void	push_pos(t_data *data, int pos, int top)
 		print_instructions(data, pos, "ra");
 		print_instructions(data, 1, "pb");
 	}
-	if (top < 0)
+	if (top == false)
 		print_instructions(data, 1, "rb");
 }
 

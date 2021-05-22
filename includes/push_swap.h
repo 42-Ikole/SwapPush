@@ -6,7 +6,7 @@
 /*   By: ingmar <ingmar@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/08 14:43:56 by ingmar        #+#    #+#                 */
-/*   Updated: 2021/05/18 13:23:36 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/22 12:54:14 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ typedef struct s_data
 **  PUSH_SWAP.C
 */
 
-void	sort_range(t_stack **a, t_stack **b);
+void	sort_range(t_data *data);
 void	print_instructions(t_data *data, int amt, char *ins);
 void	push_pos(t_data *data, int pos, int top);
-void	push_elem_b(t_stack **a, t_stack **b, int nb);
+void	push_elem_b(t_data *data, int nb);
 t_stack *pre_sort(t_stack *a);
 
 /*
