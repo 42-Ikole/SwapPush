@@ -6,101 +6,94 @@
 /*   By: ikole <ikole@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 11:45:16 by ikole         #+#    #+#                 */
-/*   Updated: 2021/05/22 20:56:46 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/24 18:24:34 by ingmar        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/helpers.h"
 #include "../includes/libps.h"
 #include "../includes/push_swap.h"
+#include <limits.h>
 #include <stdlib.h> //
 
-int			get_sec_min(int section, int range, t_stack *s)
+int			get_range_min(t_data * data, int min_id, int range)
 {
+	int i;
+	t_stack *tmp;
+
+	i = 0;
+	tmp = data->sorted;
+	while (tmp && i < min_id - range)
+	{
+		tmp = tmp->prev;
+		i++;
+	}
+	if (tmp)
+		return (tmp->nb);
+	return (INT_MIN);
+}
+
+int			get_range_max(t_data * data, int max_id, int range)
+{
+	int i;
+	t_stack *tmp;
+
+	i = 0;
+	tmp = data->sorted;
+	while (tmp && i < max_id + range)
+	{
+		tmp = tmp->prev;
+		i++;
+	}
+	if (tmp)
+		return (tmp->nb);
+	return (INT_MIN);
+}
+
+int			get_sorted_number(t_data *data, int idx)
+{
+	t_stack *tmp;
 	int i;
 
 	i = 0;
-	while (s && i < section * range)
+	tmp = data->sorted;
+	while (tmp && i < idx)
 	{
-		s = s->prev;
 		i++;
+		tmp = tmp->prev;
 	}
-	return (s->nb);
+	if (tmp)
+		return (tmp->nb);
+	return (INT_MAX);
 }
 
-int			get_sec_max(int section, int range, t_stack *s)
-{
-		int i;
-
-	i = 0;
-	while (s->prev && i < (section * range) + range - 1)
-	{
-		s = s->prev;
-		i++;
-	}
-	return (s->nb);
-}
-
-// int			get_closest(int min, int max, t_data *data)
-// {
-// 	int		pos_min;
-// 	int		pos_max;
-// 	t_stack	*tmp;
-// 	int		i;
-
-// 	tmp = data->a;
-// 	while (tmp)
-// 	{
-// 		tmp = tmp->prev;
-// 	}
-// }
-
-void		push_mul_section(int sec1, int sec2, int range, t_data *data)
+void		push_section(int mid, int range, t_data *data)
 {
 	int		min[2];
 	int		max[2];
 	t_stack	*tmp;
 	int		i;
 
-	min[0] = get_sec_min(sec1, range, data->sorted);
-	max[0] = get_sec_max(sec1, range, data->sorted);
-	min[1] = get_sec_min(sec2, range, data->sorted);
-	max[1] = get_sec_max(sec2, range, data->sorted);
 	tmp = data->a;
 	i = 0;
+	min[1] = mid;
+	max[1] = mid;
 	while (tmp)
 	{
+		min[0] = get_range_min(data, min[1], range);
+		max[0] = get_range_max(data, max[1], range);
 		if (tmp->nb >= min[0] && tmp->nb <= max[0])
-			push_pos(data, i, false);
-		else if (tmp->nb >= min[1] && tmp->nb <= max[1])
-			push_pos(data, i, true);
-		else
 		{
-			i++;
-			tmp = tmp->prev;
-			continue ;
-		}
-		tmp = data->a;
-		i = 0;
-	}
-}
-
-void		push_section(int section, int range, t_data *data, int top)
-{
-	int		min;
-	int		max;
-	t_stack	*tmp;
-	int		i;
-
-	min = get_sec_min(section, range, data->sorted);
-	max = get_sec_max(section, range, data->sorted);
-	tmp = data->a;
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->nb >= min && tmp->nb <= max)
-		{
-			push_pos(data, i, top);
+			if (tmp->nb == get_sorted_number(data, min[1]))
+				min[1]--;
+			if (tmp->nb >= get_sorted_number(data, max[1]))
+			{
+				if (tmp->nb == get_sorted_number(data, max[1]))
+					max[1]++;
+				push_pos(data, i, true);
+			}
+			else
+				push_pos(data, i, false);
 			tmp = data->a;
 			i = 0;
 			continue ;
@@ -125,8 +118,6 @@ void	sort_range(t_data *data)
 void		big_ol_sorter(t_data *data)
 {
 	int range;
-	int mid;
-	int i;
 
 	if (stack_sorted(data->a, data->b) == true)
 		return ;
@@ -135,13 +126,6 @@ void		big_ol_sorter(t_data *data)
 	else
 		data->sections = 11;
 	range = stack_size(data->a) / data->sections;
-	mid = data->sections / 2;
-	push_section(mid, range, data, true);
-	i = mid;
-	while (i >= 0)
-	{
-		push_mul_section(i, mid + diff(i, mid), range, data);
-		i--;
-	}
+	push_section(stack_size(data->a) >> 1, range, data);
 	sort_range(data);
 }
