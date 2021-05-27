@@ -6,7 +6,7 @@
 /*   By: ikole <ikole@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 11:45:16 by ikole         #+#    #+#                 */
-/*   Updated: 2021/05/27 11:24:26 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/27 11:53:51 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			get_range_max(t_data * data, int max_id, int range)
 	}
 	if (tmp)
 		return (tmp->nb);
-	return (INT_MIN);
+	return (INT_MAX);
 }
 
 int			get_sorted_number(t_data *data, int idx)
@@ -109,14 +109,8 @@ void		push_section(int mid, int range, t_data *data)
 		max[0] = get_range_max(data, max[1], range);
 		if (tmp->nb >= min[0] && tmp->nb <= max[0])
 		{
-			if (tmp->nb == get_sorted_number(data, min[1]))
-				min[1]--;
 			if (tmp->nb >= get_sorted_number(data, max[1]))
-			{
-				if (tmp->nb == get_sorted_number(data, max[1]))
-					max[1]++;
 				push_pos(data, i, true);
-			}
 			else
 				push_pos(data, i, false);
 			tmp = data->a;
