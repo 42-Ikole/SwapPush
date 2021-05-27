@@ -6,7 +6,7 @@
 /*   By: ikole <ikole@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 11:45:16 by ikole         #+#    #+#                 */
-/*   Updated: 2021/05/24 18:45:33 by ingmar        ########   odam.nl         */
+/*   Updated: 2021/05/27 11:24:26 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,31 @@ int			get_sorted_number(t_data *data, int idx)
 	return (INT_MAX);
 }
 
+int			get_next_lowest(t_data *data, int idx)
+{
+	while (idx >= 0)
+	{
+		if (stack_find(data->a, get_sorted_number(data, idx), 0) >= 0)
+			return (idx);
+		idx--;
+	}
+	return (0);
+}
+
+int			get_next_highest(t_data *data, int idx)
+{
+	int size;
+
+	size = stack_size(data->sorted);
+	while (idx < size)
+	{
+		if (stack_find(data->a, get_sorted_number(data, idx), 0) >= 0)
+			return (idx);
+		idx++;
+	}
+	return (size);
+}
+
 void		push_section(int mid, int range, t_data *data)
 {
 	int		min[2];
@@ -85,17 +110,21 @@ void		push_section(int mid, int range, t_data *data)
 		if (tmp->nb >= min[0] && tmp->nb <= max[0])
 		{
 			if (tmp->nb == get_sorted_number(data, min[1]))
-				min[1] -= range;
+				min[1]--;
 			if (tmp->nb >= get_sorted_number(data, max[1]))
 			{
 				if (tmp->nb == get_sorted_number(data, max[1]))
-					max[1] += range;
+					max[1]++;
 				push_pos(data, i, true);
 			}
 			else
 				push_pos(data, i, false);
 			tmp = data->a;
 			i = 0;
+			if (stack_find(data->a, get_sorted_number(data, min[1]), 0) == -1)
+				min[1] = get_next_lowest(data, min[1]);
+			if (stack_find(data->a, get_sorted_number(data, max[1]), 0) == -1)
+				max[1] = get_next_highest(data, max[1]);
 			continue ;
 		}
 		i++;
