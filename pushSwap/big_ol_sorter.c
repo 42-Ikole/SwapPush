@@ -6,7 +6,7 @@
 /*   By: ikole <ikole@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 11:45:16 by ikole         #+#    #+#                 */
-/*   Updated: 2021/05/27 11:53:51 by ikole         ########   odam.nl         */
+/*   Updated: 2021/05/27 13:40:44 by ikole         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,13 @@ void		push_section(int mid, int range, t_data *data)
 			if (tmp->nb >= get_sorted_number(data, max[1]))
 				push_pos(data, i, true);
 			else
+			{
 				push_pos(data, i, false);
+				if (data->a && (data->a->nb < min[0] || data->a->nb > max[0]))
+					print_instructions(data, 1, "rr");
+				else
+					print_instructions(data, 1, "rb");
+			}
 			tmp = data->a;
 			i = 0;
 			if (stack_find(data->a, get_sorted_number(data, min[1]), 0) == -1)
@@ -145,7 +151,7 @@ void		big_ol_sorter(t_data *data)
 	if (stack_sorted(data->a, data->b) == true)
 		return ;
 	if (stack_size(data->a) >= 250)
-		data->sections = 21;
+		data->sections = 23;
 	else
 		data->sections = 11;
 	range = stack_size(data->a) / data->sections;
